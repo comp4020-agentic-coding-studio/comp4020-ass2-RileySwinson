@@ -146,6 +146,51 @@ export const contradictions: readonly Contradiction[] = [
     ],
   },
   {
+    id: "generated-last-weeks-workshop",
+    week: 9,
+    component: "Generated lecture: refers to a workshop that doesn't exist",
+    claims: [
+      { page: "lectures/week-09", text: "As discussed in last week's workshop" },
+      { page: "sessions/06-the-census-date", text: "This is the final workshop." },
+    ],
+  },
+  {
+    id: "generated-45-minutes",
+    week: 9,
+    component: "Generated lecture: 45 minutes in a three-hour slot",
+    claims: [
+      { page: "lectures/week-09", text: "This lecture runs for approximately 45 minutes" },
+      { page: "timetable", text: "2:00 pm to 5:00 pm Lecture: The Generated Lecture" },
+    ],
+  },
+  {
+    id: "generated-no-assessment",
+    week: 9,
+    component: "Generated lecture: no in-lecture assessment in a lecture that has one",
+    claims: [
+      { page: "lectures/week-09", text: "there is no in-lecture assessment this week!" },
+      { page: "assessments/in-lecture-assessment", text: "An in-lecture assessment is held in every lecture." },
+    ],
+  },
+  {
+    id: "generated-final-examination",
+    week: 9,
+    component: "Generated lecture: assessed in an exam the course doesn't have",
+    claims: [
+      { page: "lectures/week-09", text: "This week's content will be assessed in the final examination." },
+      { page: "policies", text: "Comply has no final examination." },
+    ],
+  },
+  {
+    id: "generated-extensions",
+    week: 9,
+    component: "Generated lecture: cheerful about extensions",
+    claims: [
+      { page: "lectures/week-09", text: "Remember: extensions are always available if you need them!" },
+      { page: "lectures/week-11", text: "No request has yet been found to have merit." },
+    ],
+  },
+  {
     id: "identical-but-additional",
     week: 10,
     component: "Co-badged cohorts assessed identically, except postgraduates",

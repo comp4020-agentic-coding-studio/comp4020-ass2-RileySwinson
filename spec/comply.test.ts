@@ -111,7 +111,7 @@ describe("the contradiction registry", () => {
     }
   });
 
-  it.skip("gives every week at least one registered contradiction", () => {
+  it("gives every week at least one registered contradiction", () => {
     for (let week = 1; week <= 12; week++) {
       expect(
         contradictions.some((c) => c.week === week),
