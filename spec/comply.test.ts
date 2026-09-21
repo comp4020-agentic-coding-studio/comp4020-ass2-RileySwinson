@@ -32,7 +32,10 @@ const MIN_PRESCRIBED_TEXTS = 20;
 const MIN_NOT_LISTED = 10;
 /** The week 9 generated lecture, frozen once the author has chosen what to
  *  keep. Set sha256 at that point and switch its test on. */
-const FROZEN = { path: "src/content/lectures/week-09.md", sha256: "" };
+const FROZEN = {
+  path: "src/content/lectures/week-09.md",
+  sha256: "c3480de142a8ae561c60041cc35debbacafaf0d75d987b356d908aa31250dc21",
+};
 
 // --- Reading the build ------------------------------------------------------
 
@@ -263,7 +266,7 @@ describe("the class summary", () => {
 // --- Frozen pages ----------------------------------------------------------------
 
 describe("frozen pages", () => {
-  it.skip("leaves the week 9 generated lecture exactly as the author froze it", () => {
+  it("leaves the week 9 generated lecture exactly as the author froze it", () => {
     const hash = createHash("sha256").update(readFileSync(FROZEN.path)).digest("hex");
     expect(hash).toBe(FROZEN.sha256);
   });
