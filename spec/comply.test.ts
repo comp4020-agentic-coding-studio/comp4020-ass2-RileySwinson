@@ -150,14 +150,14 @@ describe("assessment", () => {
     expect(total).toBe(100);
   });
 
-  it.skip("never releases a rubric", () => {
+  it("never releases a rubric", () => {
     for (const n of nodes("assessments")) {
       expect(meta(n).marking, `${n.id} publishes marking criteria`).toBeUndefined();
       expect(pageText(n.id), `${n.id} doesn't withhold its criteria`).toContain(NO_RUBRIC);
     }
   });
 
-  it.skip("returns every mark after the census date", () => {
+  it("returns every mark after the census date", () => {
     for (const n of nodes("assessments")) {
       const returned = meta(n).returned;
       expect(returned, `${n.id} has no returned: date`).toBeDefined();
@@ -165,7 +165,7 @@ describe("assessment", () => {
     }
   });
 
-  it.skip("falls due on a public holiday at least once", () => {
+  it("falls due on a public holiday at least once", () => {
     const dues = nodes("assessments").map((n) => day(meta(n).due));
     expect(dues.some((d) => ACT_PUBLIC_HOLIDAYS.includes(d))).toBe(true);
   });
@@ -174,7 +174,7 @@ describe("assessment", () => {
 // --- Structure: workshops, then lectures ------------------------------------------
 
 describe("the teaching structure", () => {
-  it.skip("runs one unrecorded workshop a week in the first half, and no lectures", () => {
+  it("runs one unrecorded workshop a week in the first half, and no lectures", () => {
     for (let week = 1; week <= LAST_WORKSHOP_WEEK; week++) {
       const inWeek = workshops().filter((n) => meta(n).week === week);
       expect(inWeek, `week ${week} needs exactly one workshop`).toHaveLength(1);
@@ -185,7 +185,7 @@ describe("the teaching structure", () => {
     expect(early.map((n) => n.id), "lectures in the workshop half").toEqual([]);
   });
 
-  it.skip("runs each workshop as one hour, then a two-hour drop-in", () => {
+  it("runs each workshop as one hour, then a two-hour drop-in", () => {
     for (const n of workshops()) {
       const m = meta(n);
       expect(minutes(m.end) - minutes(m.start), `${n.id} contact time`).toBe(WORKSHOP_MINUTES);
@@ -193,7 +193,7 @@ describe("the teaching structure", () => {
     }
   });
 
-  it.skip("runs one long, graded lecture a week in the second half", () => {
+  it("runs one long, graded lecture a week in the second half", () => {
     for (let week = LAST_WORKSHOP_WEEK + 1; week <= 12; week++) {
       const inWeek = nodes("lectures").filter((n) => meta(n).week === week);
       expect(inWeek, `week ${week} needs exactly one lecture`).toHaveLength(1);
@@ -205,7 +205,7 @@ describe("the teaching structure", () => {
     }
   });
 
-  it.skip("moves at least one lecture into a clash with Lab A", () => {
+  it("moves at least one lecture into a clash with Lab A", () => {
     const clashes = nodes("lectures")
       .filter((l) => meta(l).moved === true)
       .some((l) =>
@@ -219,7 +219,7 @@ describe("the teaching structure", () => {
     expect(clashes).toBe(true);
   });
 
-  it.skip("gives all twelve weeks a different title", () => {
+  it("gives all twelve weeks a different title", () => {
     const titles = [...workshops(), ...nodes("lectures")].map((n) => n.title);
     expect(titles).toHaveLength(12);
     expect(new Set(titles).size).toBe(12);
@@ -235,7 +235,7 @@ describe("the teaching structure", () => {
     }
   });
 
-  it.skip("names all five platforms in the first lecture", () => {
+  it("names all five platforms in the first lecture", () => {
     const first = nodes("lectures").sort((a, b) => Number(meta(a).week) - Number(meta(b).week))[0];
     const text = pageText(first.id);
     for (const platform of PLATFORMS) {
@@ -247,7 +247,7 @@ describe("the teaching structure", () => {
 // --- The class summary --------------------------------------------------------
 
 describe("the class summary", () => {
-  it.skip("prescribes a long reading list and lists little else", () => {
+  it("prescribes a long reading list and lists little else", () => {
     const html = pageHtml("class-summary");
     const start = html.indexOf('id="prescribed-texts"');
     expect(start, "no #prescribed-texts section").toBeGreaterThan(-1);

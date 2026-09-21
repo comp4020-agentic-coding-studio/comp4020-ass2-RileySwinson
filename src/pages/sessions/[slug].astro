@@ -5,7 +5,7 @@ import RelatedContent from "astro-course-university/components/RelatedContent.as
 import SpecList from "astro-course-university/components/SpecList.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import TeachingTeam from "../../components/TeachingTeam.astro";
-import { formatCourseDate } from "../../lib/dates";
+import { formatCourseDay, formatSlot } from "../../lib/dates";
 import { graphCollections, sessionLabels, siteConfig } from "../../site-config";
 
 export async function getStaticPaths() {
@@ -15,19 +15,47 @@ export async function getStaticPaths() {
 
 const { session } = Astro.props;
 const { Content } = await render(session);
+// Timetable facts live in frontmatter only (CLAUDE.md, "Facts"); the page
+// renders them rather than the prose restating them.
+const data = session.data as typeof session.data & {
+  kind?: string;
+  start?: string;
+  end?: string;
+  dropInEnd?: string;
+  recorded?: boolean;
+};
+const isLab = data.kind === "lab";
+const title = isLab ? data.title : `Week ${data.week} ${sessionLabels.singular}: ${data.title}`;
 ---
 
-<ContentLayout
-  title={`Week ${session.data.week} ${sessionLabels.singular}: ${session.data.title}`}
-  description={session.data.description}
-  {...siteConfig}
->
-  <p><strong>{formatCourseDate(session.data.date)}</strong></p>
+<ContentLayout title={title} description={data.description} {...siteConfig}>
+  <dl class="slot">
+    <dt>Date</dt>
+    <dd>{formatCourseDay(data.date)}</dd>
+    {formatSlot(data.start, data.end) && (<dt>Time</dt><dd>{formatSlot(data.start, data.end)}</dd>)}
+    {data.dropInEnd && data.end && (<dt>Drop-in session</dt><dd>{formatSlot(data.end, data.dropInEnd)}</dd>)}
+    <dt>Recording</dt>
+    <dd>{data.recorded === false ? (isLab ? "This lab is not recorded." : "This workshop is not recorded.") : "Recorded."}</dd>
+  </dl>
   <Content />
-  <SpecList spec={session.data.spec}>
-    What you bring to the session. Written so a reader can tell whether it has
-    been met without asking you.
+  <SpecList spec={data.spec}>
+    What you bring. Items not brought are not provided.
   </SpecList>
-  <TeachingTeam teachers={session.data.teachers} />
+  <TeachingTeam teachers={data.teachers} />
   <RelatedContent entry={session} collections={graphCollections} />
 </ContentLayout>
+
+<style>
+  .slot {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.25rem 1rem;
+    margin-block: 0 1.5rem;
+  }
+  .slot dt {
+    font-weight: 700;
+  }
+  .slot dd {
+    margin: 0;
+  }
+</style>

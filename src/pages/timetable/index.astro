@@ -1,0 +1,83 @@
+---
+import { getPublishedCollection } from "astro-course-university/content";
+import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
+import { withBase } from "astro-theme-university/url";
+import { formatCourseDay, formatSlot } from "../../lib/dates";
+import { sessionLabels, siteConfig } from "../../site-config";
+
+// Every row is derived from frontmatter: the timetable restates no time of
+// its own (CLAUDE.md, "Facts").
+type Timed = { start?: string; end?: string; dropInEnd?: string; kind?: string; moved?: boolean; recorded?: boolean };
+
+interface Row {
+  week: number;
+  date: Date;
+  activity: string;
+  href: string;
+  time?: string;
+  note: string;
+}
+
+const sessions = await getPublishedCollection("sessions");
+const lectures = await getPublishedCollection("lectures");
+const rows: Row[] = [];
+
+for (const s of sessions) {
+  const d = s.data as typeof s.data & Timed;
+  if (d.kind === "lab") {
+    // The Lab A stream repeats weekly from its first lab to week 12.
+    for (let week = d.week; week <= 12; week++) {
+      const date = new Date(d.date.getTime() + (week - d.week) * 7 * 86_400_000);
+      rows.push({ week, date, activity: d.title, href: `/sessions/${s.id}/`, time: formatSlot(d.start, d.end), note: "Not recorded" });
+    }
+    continue;
+  }
+  rows.push({ week: d.week, date: d.date, activity: `${sessionLabels.singular}: ${d.title}`, href: `/sessions/${s.id}/`, time: formatSlot(d.start, d.end), note: "Not recorded" });
+  if (d.dropInEnd && d.end) {
+    rows.push({ week: d.week, date: d.date, activity: "Drop-in session", href: `/sessions/${s.id}/`, time: formatSlot(d.end, d.dropInEnd), note: "Not recorded" });
+  }
+}
+for (const l of lectures) {
+  const d = l.data as typeof l.data & Timed;
+  rows.push({ week: d.week, date: d.date, activity: `Lecture: ${d.title}`, href: `/lectures/${l.id}/`, time: formatSlot(d.start, d.end), note: [d.recorded ? "Recorded" : "Not recorded", d.moved ? "Rescheduled" : ""].filter(Boolean).join(". ") });
+}
+rows.sort((a, b) => a.date.getTime() - b.date.getTime() || (a.time ?? "").localeCompare(b.time ?? ""));
+---
+
+<ContentLayout
+  title="Timetable"
+  description="Every timetabled activity in Comply, at its current time."
+  {...siteConfig}
+>
+  <p>
+    The times below are current. Times may change. Attendance is required at
+    every timetabled activity.
+  </p>
+  <div class="table-scroll" role="region" aria-label="Timetable" tabindex="0">
+    <table>
+      <thead>
+        <tr><th scope="col">Week</th><th scope="col">Date</th><th scope="col">Time</th><th scope="col">Activity</th><th scope="col">Notes</th></tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <td>{r.week}</td>
+            <td>{formatCourseDay(r.date)}</td>
+            <td>{r.time ?? "Not listed."}</td>
+            <td><a href={withBase(r.href)}>{r.activity}</a></td>
+            <td>{r.note}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</ContentLayout>
+
+<style>
+  .table-scroll {
+    overflow-x: auto;
+  }
+  table {
+    min-width: 40rem;
+  }
+</style>

@@ -5,7 +5,7 @@ import RelatedContent from "astro-course-university/components/RelatedContent.as
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import { withBase } from "astro-theme-university/url";
 import TeachingTeam from "../../components/TeachingTeam.astro";
-import { formatCourseDate } from "../../lib/dates";
+import { formatCourseDay, formatSlot } from "../../lib/dates";
 import { graphCollections, siteConfig } from "../../site-config";
 
 export async function getStaticPaths() {
@@ -15,13 +15,46 @@ export async function getStaticPaths() {
 
 const { lecture } = Astro.props;
 const { Content } = await render(lecture);
-const title = `Week ${lecture.data.week}: ${lecture.data.title}`;
+const data = lecture.data as typeof lecture.data & {
+  start?: string;
+  end?: string;
+  moved?: boolean;
+  movedFrom?: string;
+  recorded?: boolean;
+  inLectureAssessment?: boolean;
+};
+const title = `Week ${data.week}: ${data.title}`;
 ---
 
-<ContentLayout title={title} description={lecture.data.description} {...siteConfig}>
-  <p><strong>{formatCourseDate(lecture.data.date)}</strong></p>
-  {lecture.data.slides && <p><a href={withBase(lecture.data.slides)}>Open the slides</a></p>}
+<ContentLayout title={title} description={data.description} {...siteConfig}>
+  <dl class="slot">
+    <dt>Date</dt>
+    <dd>{formatCourseDay(data.date)}</dd>
+    {formatSlot(data.start, data.end) && (<dt>Time</dt><dd>{formatSlot(data.start, data.end)}</dd>)}
+    {data.moved && (<dt>Rescheduled</dt><dd>This lecture has been rescheduled{data.movedFrom ? ` from ${data.movedFrom}` : ""}. The time above is the current time.</dd>)}
+    <dt>Recording</dt>
+    <dd>{data.recorded ? "This lecture is recorded." : "This lecture is not recorded."}</dd>
+    {data.inLectureAssessment && (
+      <><dt>Assessment</dt><dd>This lecture includes an <a href={withBase("/assessments/in-lecture-assessment/")}>in-lecture assessment</a>.</dd></>
+    )}
+  </dl>
+  {data.slides && <p><a href={withBase(data.slides)}>Open the slides</a></p>}
   <Content />
-  <TeachingTeam teachers={lecture.data.teachers} />
+  <TeachingTeam teachers={data.teachers} />
   <RelatedContent entry={lecture} collections={graphCollections} />
 </ContentLayout>
+
+<style>
+  .slot {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.25rem 1rem;
+    margin-block: 0 1.5rem;
+  }
+  .slot dt {
+    font-weight: 700;
+  }
+  .slot dd {
+    margin: 0;
+  }
+</style>

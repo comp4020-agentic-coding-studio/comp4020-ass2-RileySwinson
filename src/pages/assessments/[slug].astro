@@ -6,7 +6,7 @@ import SpecList from "astro-course-university/components/SpecList.astro";
 import Callout from "astro-theme-university/components/Callout.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import MarkingModel from "../../components/MarkingModel.astro";
-import { formatCourseDate } from "../../lib/dates";
+import { formatCourseDate, formatDue } from "../../lib/dates";
 import { graphCollections, siteConfig } from "../../site-config";
 
 export async function getStaticPaths() {
@@ -19,6 +19,14 @@ export async function getStaticPaths() {
 
 const { assessment } = Astro.props;
 const { Content } = await render(assessment);
+// `returned:` rides the schema's passthrough.
+const rawReturned = (assessment.data as { returned?: unknown }).returned;
+const returned: string | undefined =
+  rawReturned instanceof Date
+    ? rawReturned.toISOString().slice(0, 10)
+    : rawReturned
+      ? String(rawReturned).slice(0, 10)
+      : undefined;
 ---
 
 <ContentLayout
@@ -35,13 +43,14 @@ const { Content } = await render(assessment);
       </Callout>
     )
   }
-  <p><strong>Due:</strong> {formatCourseDate(assessment.data.due)} · <strong>Weight:</strong> {assessment.data.weight}%</p>
+  <p><strong>Due:</strong> {formatDue(assessment.data.due)} · <strong>Weight:</strong> {assessment.data.weight}%</p>
+  {returned && <p><strong>Returned:</strong> {formatCourseDate(returned)}</p>}
   <Content />
   <SpecList spec={assessment.data.spec}>
-    The brief poses the problem and leaves room for a response. The spec is the
-    fixed part: what a marker checks. Some lines can be checked mechanically;
-    the rest call for judgement.
+    What is submitted.
   </SpecList>
   {assessment.data.marking && <MarkingModel marking={assessment.data.marking} />}
+  <h2 id="marking-criteria">Marking criteria</h2>
+  <p>Marking criteria are not released.</p>
   <RelatedContent entry={assessment} collections={graphCollections} />
 </ContentLayout>
