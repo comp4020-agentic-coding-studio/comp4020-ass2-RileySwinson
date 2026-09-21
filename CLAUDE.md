@@ -109,3 +109,10 @@ The satire lives in the course's rules and prose, never in the site's usability.
 
 (Add an entry each time the agent gets something wrong and the fix is a rule or
 a test.)
+
+- **Audit before registering.** The first registry pass found an unintended
+  contradiction in the agent's own draft: the home page said lectures are
+  "where the course is assessed", while two assessments fall in the workshop
+  weeks. Summary pages (home, listing intros) paraphrase facts, and
+  paraphrases drift. Before registering a week, read its pages and every
+  summary that mentions it.
