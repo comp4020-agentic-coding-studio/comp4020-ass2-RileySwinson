@@ -1,10 +1,11 @@
-// The contradiction registry: every place Comply contradicts itself on
-// purpose. A contradiction is intended if and only if it is listed here.
+// The contradiction registry: every place Comply contradicts itself, or the
+// requirements of the assignment, on purpose. A contradiction is intended if
+// and only if it is listed here.
 // `comply.test.ts` fails if any listed phrase disappears from its page, so
 // "fixing" a designed contradiction turns the suite red.
 //
 // `page` is the page's path in the built site without slashes: a content
-// node's id (`lectures/week-07`, `sessions/lab-a`, `assessments/lab-a`), a
+// node's id (`lectures/week-07`, `sessions/05-continuous-integrity`, `assessments/in-lecture-assessment`), a
 // plain page (`policies`, `class-summary`), or "" for the home page.
 // `text` is matched against the page's visible text after whitespace and
 // typographic quotes are normalised, so quote it exactly as the prose reads.
@@ -16,10 +17,13 @@ export interface Claim {
 
 export interface Contradiction {
   readonly id: string;
-  /** The week whose broken component this contradiction belongs to. */
-  readonly week: number;
+  /** The week whose broken component this contradiction belongs to, if any. */
+  readonly week?: number;
   /** One line, for the author: which broken part of a university this is. */
   readonly component: string;
+  /** The assignment requirement the course contradicts, when the other side
+   *  of the contradiction is the brief rather than a second page. */
+  readonly against?: string;
   readonly claims: readonly Claim[];
 }
 
@@ -44,15 +48,6 @@ export const contradictions: readonly Contradiction[] = [
     ],
   },
   {
-    id: "examinable-without-exam",
-    week: 2,
-    component: "Prescribed texts are examinable in a course with no exam",
-    claims: [
-      { page: "class-summary", text: "All prescribed texts are examinable." },
-      { page: "policies", text: "Comply has no final examination." },
-    ],
-  },
-  {
     id: "business-hours-on-a-holiday",
     week: 3,
     component: "Due on a public holiday; submissions only in business hours",
@@ -64,10 +59,10 @@ export const contradictions: readonly Contradiction[] = [
   {
     id: "drop-in-is-not-teaching",
     week: 4,
-    component: "Assessed time that isn't scheduled teaching",
+    component: "Timetabled time that isn't scheduled teaching",
     claims: [
       { page: "sessions/04-associated-working-time", text: "The drop-in session is not scheduled teaching." },
-      { page: "assessments/associated-working-time", text: "Associated Working Time is assessed during the drop-in session." },
+      { page: "timetable", text: "Drop-in session" },
     ],
   },
   {
@@ -78,7 +73,7 @@ export const contradictions: readonly Contradiction[] = [
       { page: "people/sam-okafor", text: "Sam is employed for one hour per week." },
       {
         page: "sessions/04-associated-working-time",
-        text: "During the drop-in session the tutor supervises the room, assesses Associated Working Time, and answers questions posted to the course forum.",
+        text: "During the drop-in session the tutor supervises the room and answers questions posted to the course forum.",
       },
     ],
   },
@@ -97,7 +92,7 @@ export const contradictions: readonly Contradiction[] = [
     component: "The assignment is introduced two weeks after it is due",
     claims: [
       { page: "sessions/05-continuous-integrity", text: "The assignment specification is released in this workshop." },
-      { page: "sessions/03-the-public-holiday", text: "This workshop is held on the day after the Continuous Integrity Assignment is due." },
+      { page: "assessments/continuous-integrity-assignment", text: "Due: 12:00 pm, Monday 8 March 2027" },
     ],
   },
   {
@@ -109,7 +104,7 @@ export const contradictions: readonly Contradiction[] = [
         page: "sessions/06-the-census-date",
         text: "Students should use their marks to decide whether to continue in the course before the census date.",
       },
-      { page: "assessments/associated-working-time", text: "Returned: 24 May 2027" },
+      { page: "assessments/continuous-integrity-assignment", text: "Returned: 24 May 2027" },
     ],
   },
   {
@@ -119,15 +114,6 @@ export const contradictions: readonly Contradiction[] = [
     claims: [
       { page: "lectures/week-07", text: "All course announcements are made on Teams." },
       { page: "policies", text: "Course announcements are made on Wattle only." },
-    ],
-  },
-  {
-    id: "lecture-lab-clash",
-    week: 7,
-    component: "Compulsory lecture moved onto a compulsory lab",
-    claims: [
-      { page: "lectures/week-07", text: "Attendance at every lecture is required for the in-lecture assessment." },
-      { page: "sessions/lab-a", text: "Attendance at every Lab A session is required." },
     ],
   },
   {
@@ -173,15 +159,6 @@ export const contradictions: readonly Contradiction[] = [
     ],
   },
   {
-    id: "generated-final-examination",
-    week: 9,
-    component: "Generated lecture: assessed in an exam the course doesn't have",
-    claims: [
-      { page: "lectures/week-09", text: "This week's content will be assessed in the final examination." },
-      { page: "policies", text: "Comply has no final examination." },
-    ],
-  },
-  {
     id: "generated-extensions",
     week: 9,
     component: "Generated lecture: cheerful about extensions",
@@ -205,7 +182,7 @@ export const contradictions: readonly Contradiction[] = [
     component: "Appeals must cite the rubric that is never released",
     claims: [
       { page: "policies", text: "Review requests must identify the marking criterion that was misapplied." },
-      { page: "assessments/lab-a", text: "Marking criteria are not released." },
+      { page: "assessments/continuous-integrity-assignment", text: "Marking criteria are not released." },
     ],
   },
   {
@@ -224,6 +201,69 @@ export const contradictions: readonly Contradiction[] = [
     claims: [
       { page: "lectures/week-12", text: "The class summary lists every field required by SLOPU_018809." },
       { page: "class-summary", text: "Not listed." },
+    ],
+  },
+  {
+    id: "assessed-in-lectures",
+    week: 1,
+    component: "Assessment is in lectures; A1 falls due in the workshop weeks",
+    claims: [
+      { page: "class-summary", text: "Assessment is conducted in lectures in weeks 7 to 12." },
+      { page: "assessments/continuous-integrity-assignment", text: "Due: 12:00 pm, Monday 8 March 2027" },
+    ],
+  },
+  {
+    id: "cohort-sets-its-own-requirements",
+    week: 11,
+    component: "A2: the group writes the requirements; nobody sees the criteria",
+    claims: [
+      { page: "assessments/whole-cohort-project", text: "The requirements of the application are determined by the group." },
+      { page: "class-summary", text: "Each task's page sets out how it is assessed." },
+    ],
+  },
+  {
+    id: "cohort-meets-outside-the-timetable",
+    week: 11,
+    component: "A2: group meetings are untimetabled; every timetabled activity is compulsory",
+    claims: [
+      { page: "assessments/whole-cohort-project", text: "Group meetings are not timetabled." },
+      { page: "policies", text: "Attendance is required at every timetabled activity." },
+    ],
+  },
+  {
+    id: "one-student-submits-for-all",
+    week: 11,
+    component: "A2: one student submits for the cohort; a late or early submission scores 0",
+    claims: [
+      { page: "assessments/whole-cohort-project", text: "One submission is made on behalf of the group. The group determines which student submits." },
+      { page: "policies", text: "Assessment submitted after the due time receives a mark of 0." },
+    ],
+  },
+  {
+    id: "commit-history-required-and-ignored",
+    week: 11,
+    component: "A1 counts every hourly commit; A2 requires the history and ignores it",
+    claims: [
+      { page: "assessments/whole-cohort-project", text: "The commit history is not used to determine a student's mark." },
+      { page: "assessments/continuous-integrity-assignment", text: "A commit must be made in every hour from release to the due time." },
+    ],
+  },
+  {
+    id: "organising-assessed-by-allocation",
+    week: 11,
+    component: "Collective organising is a learning outcome, assessed by a group the convener allocates",
+    claims: [
+      { page: "class-summary", text: "organise collectively in response to decisions of the University" },
+      { page: "assessments/whole-cohort-project", text: "Students are allocated to the group manually by the course convener." },
+    ],
+  },
+  {
+    id: "one-mark-but-additional-assessment",
+    week: 10,
+    component: "Postgraduates complete additional assessment; A2 gives every student one mark",
+    claims: [
+      { page: "lectures/week-10", text: "Postgraduate students complete additional assessment." },
+      { page: "assessments/whole-cohort-project", text: "Every member of the group is awarded that mark." },
     ],
   },
 ];
