@@ -349,4 +349,22 @@ export const contradictions: readonly Contradiction[] = [
       { page: "assessments/continuous-integrity-assignment", text: "Weight: 5%" },
     ],
   },
+  {
+    id: "generated-deck-no-assessment",
+    week: 9,
+    component: "Generated deck: no in-lecture assessment in a lecture that has one",
+    claims: [
+      { page: "decks/week-09", text: "there is no in-lecture assessment component in this lecture" },
+      { page: "assessments/in-lecture-assessment", text: "An in-lecture assessment is held in every lecture." },
+    ],
+  },
+  {
+    id: "generated-deck-45-minutes",
+    week: 9,
+    component: "Generated deck: a 45-minute lecture in a three-hour slot",
+    claims: [
+      { page: "decks/week-09", text: "This 45-minute lecture covers essential compliance competencies." },
+      { page: "timetable", text: "2:00 pm to 5:00 pm Lecture: The Generated Lecture" },
+    ],
+  },
 ];

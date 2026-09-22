@@ -46,7 +46,7 @@ const MIN_NOT_LISTED = 10;
 const FROZEN = [
   {
     path: "src/content/lectures/week-09.md",
-    sha256: "c3480de142a8ae561c60041cc35debbacafaf0d75d987b356d908aa31250dc21",
+    sha256: "4f677d58b96ff8abc53086b81dfe51d16613031ede8c1a677ecdbe62b90915b2",
   },
 ];
 

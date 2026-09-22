@@ -11,6 +11,7 @@ moved: true
 movedFrom: Thursday 6 May, 9:00 am
 recorded: true
 inLectureAssessment: true
+slides: /decks/week-09/
 teachers:
   - cornelius-grimm
 related:
