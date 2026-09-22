@@ -40,26 +40,77 @@ const NO_RUBRIC = "Marking criteria are not released.";
 const PLATFORMS = ["Wattle", "Canvas", "Ed", "Teams", "email"];
 const MIN_PRESCRIBED_TEXTS = 20;
 const MIN_NOT_LISTED = 10;
-/** Pages the author has checked and frozen. A page is added here, with the
- *  SHA-256 of its source, once the author signs it off (CLAUDE.md, "Frozen
- *  pages"). */
+/** The week 9 lecture: generated, and exempt from the voice rules and the
+ *  outline requirement. */
+const GENERATED_LECTURE = "lectures/week-09";
+/** Every source file the site is built from, frozen once the author signed
+ *  the course off. A file's SHA-256 is recorded here and it is never edited
+ *  again (CLAUDE.md, "Frozen pages"). */
 const FROZEN = [
-  {
-    path: "src/content/lectures/week-09.md",
-    sha256: "4f677d58b96ff8abc53086b81dfe51d16613031ede8c1a677ecdbe62b90915b2",
-  },
-  {
-    path: "src/pages/lectures/index.mdx",
-    sha256: "22d1cb76b4f3a655eca94c12ce52693b0506667874abe50cf3c031a0cfff5b1f",
-  },
-  {
-    path: "src/pages/class-summary/index.mdx",
-    sha256: "080258c8ef00f60e813be77491949c572a0269d6fcb9bafed1fcd0fd89292e72",
-  },
-  {
-    path: "src/pages/people/index.mdx",
-    sha256: "c83fb8e727b00cf2d4bbd42f9246692640caf6dea3458f6a14d9777c53080393",
-  },
+  { path: "src/assets/images/card.png", sha256: "26c48945fe0b4b4558f387fa814b8e79368d5fa135200c21a38f9dd9de5a0b91" },
+  { path: "src/components/AssessmentSummary.astro", sha256: "8209740c68330c1bd1c45ca15bb5c3aff0bcddcbddcfaecee3360261754d2590" },
+  { path: "src/components/AssessmentsGrid.astro", sha256: "36b51a48201fe5633a0e73308de7daf2d4ee0dc8004a4a3d5b5eac2f157e18a8" },
+  { path: "src/components/CourseStaff.astro", sha256: "8b1db1d38e5e83248359909acdd2d304a53e445899bcf846dd3ab5eae8f3fc23" },
+  { path: "src/components/LecturesGrid.astro", sha256: "94f03432528aabe3136c3d195348be610a2d955a3326116c2feb74c51fe15513" },
+  { path: "src/components/MarkingModel.astro", sha256: "fdf1e4acd6e6f9f3eafe5df64910874369a547dd8c5bd16f9731ad84482ce24d" },
+  { path: "src/components/PeopleGrid.astro", sha256: "7f38dcfea34451bc533ec41cbe6d1112b90d1ae437a63798c523b6e11f14ba6f" },
+  { path: "src/components/ReturnDate.astro", sha256: "7ca01375c6e7b91eb66b99c41365c577b8e7964a11d17ed22e9034f318f77b76" },
+  { path: "src/components/SessionsGrid.astro", sha256: "3168a7b3cd7fb5a34a2539a9efa678b40fdeee7133e9fc05283a6938a139cd41" },
+  { path: "src/content.config.ts", sha256: "287484ed9af1e6dd1813cbcf790117b8786ef771948b02a2828d5fdf4797a1cf" },
+  { path: "src/content/assessments/continuous-integrity-assignment.md", sha256: "7054555a07683f3920f204b0347b34bc48ca2071ee39b0e24b1cb7728a9c6ddf" },
+  { path: "src/content/assessments/final-examination.md", sha256: "b2273be58429aed27b51f254667137b952f744bfb2ae9bb4f22382d5ec9d45f5" },
+  { path: "src/content/assessments/in-lecture-assessment.md", sha256: "d22ab359e29c62d7f3c41b12963c8063de03658d8d8797d877becea92846e8c5" },
+  { path: "src/content/assessments/labs.md", sha256: "009526f4e8bfe77924329d194c1d95f8bcd17c1398d48df150e666980a515fe9" },
+  { path: "src/content/assessments/whole-cohort-project.md", sha256: "5e6d083473d95b655d92f9bb438c693294b2495060844b147ae27fe410b3f8f0" },
+  { path: "src/content/lectures/week-07.md", sha256: "669d89b7a6b88ff7c58583fbc0c8c65d4101f4425ce0cd0f2e7eea87a32bed2d" },
+  { path: "src/content/lectures/week-08.md", sha256: "345cb9807eb8bf738e38ab084652cf7d7d0fbf1aa918e607118bc733a8af6018" },
+  { path: "src/content/lectures/week-09.md", sha256: "4f677d58b96ff8abc53086b81dfe51d16613031ede8c1a677ecdbe62b90915b2" },
+  { path: "src/content/lectures/week-10.md", sha256: "24b6d64515f57ac33a4f1c9eca25b2789bf66821dbc95560597c0e0f6f294501" },
+  { path: "src/content/lectures/week-11.md", sha256: "d8c38298f4b240f8dfc31967b6236771cc465298d9249e0fe12bb2f76134e3b4" },
+  { path: "src/content/lectures/week-12.md", sha256: "5fc93478a008222b266cb6fbd1bce34d76bd21ae70e5d82a2c3b0609c664156f" },
+  { path: "src/content/people/cornelius-grimm.md", sha256: "d3dc30046a0cb9671d37835971445066cf833eba6a2a7c476516a9341b0c4f18" },
+  { path: "src/content/people/ellie-marsh.md", sha256: "385109c67483e98c9c0de56ecdb8d15b3d12df818e4af14e0aa90ae725f1b5f1" },
+  { path: "src/content/people/hannah-voss.md", sha256: "6e95ba706775f6e1e9341403fe03b2aabdb5a5b5a2972cc14fcfdc7b146a0a16" },
+  { path: "src/content/people/jordan-keel.md", sha256: "05f099f39190e29a8cbc1ee5705aea76424e00ea437ab2042a04aa6272004470" },
+  { path: "src/content/people/sam-okafor.md", sha256: "2ac2c9cca54982d38359003458dea0ed70fd9e33787160140829e547cab32f4a" },
+  { path: "src/content/sessions/01-reading-the-class-summary.md", sha256: "c701b6dc4d97e83fb114d3ef25ca465a7c89052244eb79a4c13030dc84b0554d" },
+  { path: "src/content/sessions/02-prescribed-reading.md", sha256: "ec9f7a4b7d4c5bfdc0f504017f2f40941e55b5321b1326ceb6bfe048096e3719" },
+  { path: "src/content/sessions/03-no-content.md", sha256: "72ec595c1c302cec65ccc52d91c700554934e138c324968aeec14fff2f34447a" },
+  { path: "src/content/sessions/04-associated-working-time.md", sha256: "4f26a437bacaa420f7c4e7a623ba009ac2b22b5f9ef5ab39eea62db872bcdcec" },
+  { path: "src/content/sessions/05-continuous-integrity.md", sha256: "4f8925c66a050d06ab2241a5058b85d0ee003a5e397a0aa578bc7e18bcacb9b4" },
+  { path: "src/content/sessions/06-the-census-date.md", sha256: "bf49d7512dafcf58f7b2b36cf2cb46cae74568baec72e9c60676482bd1dad602" },
+  { path: "src/content/sessions/lab-07-1.md", sha256: "93f67efbe8283346cc53245df0a9f6d4375702ec7fbf7a960c45a83bd5562c4c" },
+  { path: "src/content/sessions/lab-07-2.md", sha256: "b2a1c88ee343ea3535c93726866f8cc725e809b336854d5f70c7bfc31a932a88" },
+  { path: "src/content/sessions/lab-07-3.md", sha256: "1c0e3fde8af293aebf3e48e4a28f6081232a9581af4bd508ad08560064ce8133" },
+  { path: "src/content/sessions/lab-09-1.md", sha256: "ff6297bb71ef277d08ca6526f4cf341453a03ca01b6c027f79e375432a8e5832" },
+  { path: "src/content/sessions/lab-09-2.md", sha256: "b5666758c9e174bfeebf5b229c3b32465f5254fc8b3c2e40482ee670ee5e4bb1" },
+  { path: "src/content/sessions/lab-09-3.md", sha256: "45ea5f92ac62a5750fb261021b682e6ef3afb3cda78d5ec7c303cb4dee5b94a5" },
+  { path: "src/content/sessions/lab-10-1.md", sha256: "9b751f1830ed2ad92af107ced741c0e5778011d164d818d291ecfb63097e3a75" },
+  { path: "src/content/sessions/lab-10-2.md", sha256: "1bca9cbcb816c83c6822795d9d6a21e8a468d20bfb26af4cc468fc1482f1f6fc" },
+  { path: "src/content/sessions/lab-10-3.md", sha256: "c0a75d2132e8a8a47a485b570b87ceb2099e22fbaf2c29078c4193dc0af2e6e1" },
+  { path: "src/content/sessions/lab-12-1.md", sha256: "a208db5f2abf644ef37e8326a1a6b1e0a5708dfd7e7191476b33c1ad1e596531" },
+  { path: "src/content/sessions/lab-12-2.md", sha256: "5dd9dfc474efbc30cd81d8109f4bd82b0d085bcb9f71712411d81fe3a208c7c8" },
+  { path: "src/content/sessions/lab-12-3.md", sha256: "73166e7efd9edbabde96ff050355ff70679791a3fb85c966df69ff8cebc74244" },
+  { path: "src/course-config.ts", sha256: "426466cde08f0d60fe5836a92373ec41cb3ded94911356bcd7f50fa93fb7a96b" },
+  { path: "src/decks/theme.css", sha256: "6857acabe9ad271c407dba4eba9a33167c76395851e436f421bd2074a7ef68ca" },
+  { path: "src/decks/week-07.deck.mdx", sha256: "421f784282ef091eae7cfa9c25293a5c11cce0d8e0295d18cab5d9997322f92f" },
+  { path: "src/decks/week-09.deck.mdx", sha256: "8bc7a9b6ef2b5b85177de3b281ca3557be7519687ffb6f2178d31860ab2b3d07" },
+  { path: "src/layouts/PageLayout.astro", sha256: "d79cffd8213f4787bab8d5cd7b5fd90309e1872f796d955ee4575f363bc65687" },
+  { path: "src/lib/dates.ts", sha256: "865ad6497540163149eb349889dfc112245a944c85efecfd2728de91823450e4" },
+  { path: "src/pages/404.md", sha256: "30c1d82f05ef4c77e15d84bff9913ee9b9fc6c3b6443f9d8cdfad2fd616156c3" },
+  { path: "src/pages/assessments/[slug].astro", sha256: "4bfb856b5aff3299996d3e72b8d4ce9dd31b057442045ca7f756c5625150d78d" },
+  { path: "src/pages/assessments/index.mdx", sha256: "942e162bbcd0525ae7f224effce189b790a9df8b79039436d5f45f0b73fbe081" },
+  { path: "src/pages/class-summary/index.mdx", sha256: "080258c8ef00f60e813be77491949c572a0269d6fcb9bafed1fcd0fd89292e72" },
+  { path: "src/pages/index.astro", sha256: "04501dbd7ffefbd1f4b1037d6b852b887e5750e7c50f0be51d5acfef7db4af0f" },
+  { path: "src/pages/lectures/[slug].astro", sha256: "ad1502f197d4ab9ff704970f2e2e51431888303527e62f078a6767b5343645d6" },
+  { path: "src/pages/lectures/index.mdx", sha256: "22d1cb76b4f3a655eca94c12ce52693b0506667874abe50cf3c031a0cfff5b1f" },
+  { path: "src/pages/people/[slug].astro", sha256: "cd9d701e9bdf3f602e7b97f1cf74ce88a81859c40660509cef94c54430001c21" },
+  { path: "src/pages/people/index.mdx", sha256: "c83fb8e727b00cf2d4bbd42f9246692640caf6dea3458f6a14d9777c53080393" },
+  { path: "src/pages/policies/index.mdx", sha256: "3228465057b63f93a11e1515163a4c48e0654b825f7e11bbc40d61106830a5ae" },
+  { path: "src/pages/sessions/[slug].astro", sha256: "9845031b8ee836392b65fa20b97344de6ffd4344a1fdaf95fd533798a79ede64" },
+  { path: "src/pages/sessions/index.astro", sha256: "be2e3aacb4b0b5cce994434b116ea77d9b30909c9112f9a6988eeb1b3f3ddb9a" },
+  { path: "src/pages/timetable/index.astro", sha256: "2b2f90833071329415c680cbb70dc77fae12718250718123cb8b9dfb4ea6e3b6" },
+  { path: "src/site-config.ts", sha256: "12b1247db5d5722acbd16a1465fe1626a92dd4d0f491784b9dc598972d067e5b" },
 ];
 
 // --- Reading the build ------------------------------------------------------
@@ -251,9 +302,8 @@ describe("the teaching structure", () => {
     }
   });
 
-  it("gives every lecture but a frozen one a public outline", () => {
-    const frozen = new Set(FROZEN.map((f) => f.path));
-    for (const n of nodes("lectures").filter((l) => !frozen.has(`src/content/${l.id}.md`))) {
+  it("gives every lecture but the generated one a public outline", () => {
+    for (const n of nodes("lectures").filter((l) => l.id !== GENERATED_LECTURE)) {
       expect(pageHtml(n.id), `${n.id} has no #outline section`).toContain('id="outline"');
     }
   });
