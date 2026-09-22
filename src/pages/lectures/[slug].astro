@@ -4,7 +4,7 @@ import { getPublishedCollection } from "astro-course-university/content";
 import RelatedContent from "astro-course-university/components/RelatedContent.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import { withBase } from "astro-theme-university/url";
-import TeachingTeam from "../../components/TeachingTeam.astro";
+import CourseStaff from "../../components/CourseStaff.astro";
 import { formatCourseDay, formatSlot } from "../../lib/dates";
 import { graphCollections, siteConfig } from "../../site-config";
 
@@ -28,6 +28,7 @@ const title = `Week ${data.week}: ${data.title}`;
 
 <ContentLayout title={title} description={data.description} {...siteConfig}>
   <dl class="slot">
+    <CourseStaff teachers={data.teachers} />
     <dt>Date</dt>
     <dd>{formatCourseDay(data.date)}</dd>
     {formatSlot(data.start, data.end) && (<dt>Time</dt><dd>{formatSlot(data.start, data.end)}</dd>)}
@@ -40,7 +41,6 @@ const title = `Week ${data.week}: ${data.title}`;
   </dl>
   {data.slides && <p><a href={withBase(data.slides)}>Open the slides</a></p>}
   <Content />
-  <TeachingTeam teachers={data.teachers} />
   <RelatedContent entry={lecture} collections={graphCollections} />
 </ContentLayout>
 
@@ -51,10 +51,10 @@ const title = `Week ${data.week}: ${data.title}`;
     gap: 0.25rem 1rem;
     margin-block: 0 1.5rem;
   }
-  .slot dt {
+  .slot :global(dt) {
     font-weight: 700;
   }
-  .slot dd {
+  .slot :global(dd) {
     margin: 0;
   }
 </style>

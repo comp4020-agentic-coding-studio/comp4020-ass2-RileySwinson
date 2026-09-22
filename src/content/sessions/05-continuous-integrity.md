@@ -10,7 +10,7 @@ end: "17:00"
 dropInEnd: "19:00"
 recorded: false
 teachers:
-  - sam-okafor
+  - jordan-keel
 related:
   - assessments/continuous-integrity-assignment
 ---
@@ -27,3 +27,10 @@ The assignment specification is released in this workshop.
 - remaining available for questioning
 
 Students who have submitted the assignment are expected to attend.
+
+## Before the workshop
+
+Read the following in full:
+
+- SLOPU_6477150, Procedure: Student academic integrity
+- SLOPU_004604, Procedure: Student assessment (coursework)

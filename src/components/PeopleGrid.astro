@@ -7,15 +7,17 @@ const people = await getPublishedCollection("people");
 
 const roleOrder: Record<string, number> = {
   convenor: 0,
-  tutor: 1,
-  guest: 2,
-  other: 3,
+  "co-convenor": 1,
+  tutor: 2,
+  guest: 3,
+  other: 4,
 };
 
 // Map the role enum (convenor|tutor|guest|other) to display labels rather than
 // rendering the raw lowercase value.
 const roleLabels: Record<string, string> = {
   convenor: "Convenor",
+  "co-convenor": "Co-convenor",
   tutor: "Tutor",
   guest: "Guest lecturer",
   other: "",

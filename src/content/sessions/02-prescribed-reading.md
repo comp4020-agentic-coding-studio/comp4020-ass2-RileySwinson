@@ -10,9 +10,7 @@ end: "17:00"
 dropInEnd: "19:00"
 recorded: false
 teachers:
-  - sam-okafor
-spec:
-  - the prescribed edition of each prescribed text
+  - jordan-keel
 ---
 
 The [class summary](/class-summary/) prescribes the texts for Comply. This
@@ -35,3 +33,12 @@ not meet the prerequisite are advised to complete Comply before enrolling in it.
 
 Other editions of a prescribed text are not accepted. Students who are unable
 to obtain a prescribed edition should raise this in the workshop.
+
+## Before the workshop
+
+Read the following in full:
+
+- SLOPU_000360, Policy: Academic programs and courses accreditation
+- SLOPU_008804, Procedure: Education materials access
+
+Bring the prescribed edition of each prescribed text.

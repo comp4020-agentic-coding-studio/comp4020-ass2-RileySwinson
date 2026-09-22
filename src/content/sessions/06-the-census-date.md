@@ -10,7 +10,7 @@ end: "17:00"
 dropInEnd: "19:00"
 recorded: false
 teachers:
-  - sam-okafor
+  - ellie-marsh
 ---
 
 The census date is the last day on which a student may withdraw from Comply
@@ -29,3 +29,10 @@ before the census date.
 
 This is the final workshop. From week 7, Comply is delivered in lectures. The
 content of workshops 1 to 6 is assessed in weeks 7 to 12.
+
+## Before the workshop
+
+Read the following in full:
+
+- SLOPU_019608, Procedure: Late withdrawal
+- SLOPU_002610, Procedure: Student tuition fee refunds

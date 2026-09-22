@@ -1,0 +1,31 @@
+---
+import { getEntries, type CollectionEntry } from "astro:content";
+import { withBase } from "astro-theme-university/url";
+
+// The "Course staff" row at the top of a workshop or lecture page. It renders
+// a <dt>/<dd> pair, so it goes inside the page's details list.
+interface Props {
+  teachers: CollectionEntry<"sessions">["data"]["teachers"] | CollectionEntry<"lectures">["data"]["teachers"];
+}
+
+const { teachers } = Astro.props;
+// A session or lecture with no `teachers:` renders no row at all.
+const people = teachers ? await getEntries(teachers) : [];
+const roleLabel = (role: string) => role.charAt(0).toUpperCase() + role.slice(1);
+---
+
+{
+  people.length > 0 && (
+    <>
+      <dt>Course staff</dt>
+      <dd>
+        {people.map((person, i) => (
+          <>
+            {i > 0 && ", "}
+            <a href={withBase(`/people/${person.id}/`)}>{person.data.title}</a> ({roleLabel(person.data.role)})
+          </>
+        ))}
+      </dd>
+    </>
+  )
+}

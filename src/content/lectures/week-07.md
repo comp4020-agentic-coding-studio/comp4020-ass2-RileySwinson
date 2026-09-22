@@ -16,7 +16,6 @@ teachers:
   - cornelius-grimm
 related:
   - assessments/in-lecture-assessment
-  - sessions/lab-a
 ---
 
 This is the first lecture of Comply.

@@ -2,9 +2,8 @@
 import { render } from "astro:content";
 import { getPublishedCollection } from "astro-course-university/content";
 import RelatedContent from "astro-course-university/components/RelatedContent.astro";
-import SpecList from "astro-course-university/components/SpecList.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
-import TeachingTeam from "../../components/TeachingTeam.astro";
+import CourseStaff from "../../components/CourseStaff.astro";
 import { formatCourseDay, formatSlot } from "../../lib/dates";
 import { graphCollections, sessionLabels, siteConfig } from "../../site-config";
 
@@ -25,23 +24,21 @@ const data = session.data as typeof session.data & {
   recorded?: boolean;
 };
 const isLab = data.kind === "lab";
-const title = isLab ? data.title : `Week ${data.week} ${sessionLabels.singular}: ${data.title}`;
+const isBreak = data.kind === "break";
+const title = isLab ? data.title : isBreak ? `Week ${data.week}: ${data.title}` : `Week ${data.week} ${sessionLabels.singular}: ${data.title}`;
 ---
 
 <ContentLayout title={title} description={data.description} {...siteConfig}>
   <dl class="slot">
+    <CourseStaff teachers={data.teachers} />
     <dt>Date</dt>
     <dd>{formatCourseDay(data.date)}</dd>
     {formatSlot(data.start, data.end) && (<dt>Time</dt><dd>{formatSlot(data.start, data.end)}</dd>)}
     {data.dropInEnd && data.end && (<dt>Drop-in session</dt><dd>{formatSlot(data.end, data.dropInEnd)}</dd>)}
-    <dt>Recording</dt>
-    <dd>{data.recorded === false ? (isLab ? "This lab is not recorded." : "This workshop is not recorded.") : "Recorded."}</dd>
+    {!isBreak && (<><dt>Recording</dt>
+    <dd>{data.recorded === false ? (isLab ? "This lab is not recorded." : "This workshop is not recorded.") : "Recorded."}</dd></>)}
   </dl>
   <Content />
-  <SpecList spec={data.spec}>
-    What you bring. Items not brought are not provided.
-  </SpecList>
-  <TeachingTeam teachers={data.teachers} />
   <RelatedContent entry={session} collections={graphCollections} />
 </ContentLayout>
 
@@ -52,10 +49,10 @@ const title = isLab ? data.title : `Week ${data.week} ${sessionLabels.singular}:
     gap: 0.25rem 1rem;
     margin-block: 0 1.5rem;
   }
-  .slot dt {
+  .slot :global(dt) {
     font-weight: 700;
   }
-  .slot dd {
+  .slot :global(dd) {
     margin: 0;
   }
 </style>

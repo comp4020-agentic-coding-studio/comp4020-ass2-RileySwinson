@@ -10,12 +10,7 @@ end: "17:00"
 dropInEnd: "19:00"
 recorded: false
 teachers:
-  - sam-okafor
-spec:
-  - a printed copy of the class summary
-  - a pen
-related:
-  - assessments/associated-working-time
+  - ellie-marsh
 ---
 
 This workshop introduces the class summary: where it is published, which of
@@ -26,15 +21,22 @@ Where the class summary and the workshop differ, the workshop applies.
 
 ## In this workshop
 
-- where the class summary is published
+- how to find the published class summary
 - which sections of the class summary are authoritative
-- how to read a field that is not listed
-- how assessment in Comply works
-- the information students need to complete weeks 2 to 6
+- which sections of the class summary the course convener may vary
+- which sections of the class summary are authoritative and are not enforced
+- how to interpret a class summary in which required fields are not listed
+- the information required to complete weeks 2 to 6
 
 The information students need to complete weeks 2 to 6 is distributed once, in
 this workshop.
 
 ## Before the workshop
 
-Read the [class summary](/class-summary/) in full.
+Read the following in full:
+
+- the [class summary](/class-summary/)
+- SLOPU_018808, Policy: Class summary
+- SLOPU_018809, Procedure: Class Summary
+
+Bring a printed copy of the class summary and a pen.

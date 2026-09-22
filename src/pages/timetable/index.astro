@@ -24,6 +24,7 @@ const rows: Row[] = [];
 
 for (const s of sessions) {
   const d = s.data as typeof s.data & Timed;
+  if (d.kind === "break") continue;
   if (d.kind === "lab") {
     // The Lab A stream repeats weekly from its first lab to week 12.
     for (let week = d.week; week <= 12; week++) {
