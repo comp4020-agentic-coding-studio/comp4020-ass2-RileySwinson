@@ -30,6 +30,8 @@ To include more critiques, I split the course into workshops and lectures ([`40e
 - Self-clashing course components, such as a lab with a lecture ([`62026a3`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-RileySwinson/commit/62026a3))
 - Labs being in seemingly random weeks
 - Use of AI in creating courses (somewhat)
+- Arbitrary enforcement of AI rules against students
+- Massive reading lists which serve little practical purpose
 - Many others
 
-To be honest, while the motivations and reasons for these critiques are quite justifiable and informed, the fact that most of this content is AI-generated weakens the message.
+To be honest, while I believe my motivations and reasons for these critiques are quite justifiable and informed, the fact that most of this assignment's content is AI-generated weakens the message substantially. I wouldn't take anything in this assignment very seriously.
