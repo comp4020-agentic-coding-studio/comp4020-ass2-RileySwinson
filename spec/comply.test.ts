@@ -48,6 +48,18 @@ const FROZEN = [
     path: "src/content/lectures/week-09.md",
     sha256: "4f677d58b96ff8abc53086b81dfe51d16613031ede8c1a677ecdbe62b90915b2",
   },
+  {
+    path: "src/pages/lectures/index.mdx",
+    sha256: "22d1cb76b4f3a655eca94c12ce52693b0506667874abe50cf3c031a0cfff5b1f",
+  },
+  {
+    path: "src/pages/class-summary/index.mdx",
+    sha256: "080258c8ef00f60e813be77491949c572a0269d6fcb9bafed1fcd0fd89292e72",
+  },
+  {
+    path: "src/pages/people/index.mdx",
+    sha256: "c83fb8e727b00cf2d4bbd42f9246692640caf6dea3458f6a14d9777c53080393",
+  },
 ];
 
 // --- Reading the build ------------------------------------------------------
