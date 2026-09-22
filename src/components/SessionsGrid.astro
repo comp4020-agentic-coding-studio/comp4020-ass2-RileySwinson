@@ -4,8 +4,17 @@ import Card from "astro-theme-university/components/Card.astro";
 import CardGrid from "astro-theme-university/components/CardGrid.astro";
 import { formatCourseDate } from "../lib/dates";
 
+interface Props {
+  /** "labs" lists lab streams; anything else lists workshop weeks. */
+  show?: "workshops" | "labs";
+}
+
+const { show = "workshops" } = Astro.props;
 const sessions = await getPublishedCollection("sessions");
-const visible = sessions.sort((a, b) => a.data.week - b.data.week);
+const isLab = (s: (typeof sessions)[number]) => (s.data as { kind?: string }).kind === "lab";
+const visible = sessions
+  .filter((s) => (show === "labs" ? isLab(s) : !isLab(s)))
+  .sort((a, b) => a.data.week - b.data.week || a.data.date.getTime() - b.data.date.getTime());
 ---
 
 <CardGrid columns={2}>

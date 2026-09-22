@@ -195,13 +195,13 @@ describe("the teaching structure", () => {
     expect(early.map((n) => n.id), "lectures in the workshop half").toEqual([]);
   });
 
-  it.skip("states on the workshops page why workshops are not recorded", () => {
+  it("states on the workshops page why workshops are not recorded", () => {
     const html = pageHtml("sessions");
     expect(pageText("sessions")).toContain(NO_RECORDING_NOTICE);
     expect(html, "\"lectures\" must be struck out").toMatch(/<(del|s)>\s*lectures\s*<\/\1>/);
   });
 
-  it.skip("offers an alternative reading, and no content, on each workshop page", () => {
+  it("offers an alternative reading, and no content, on each workshop page", () => {
     for (const n of workshops()) {
       const html = pageHtml(n.id);
       const start = html.indexOf('id="alternative-reading"');
@@ -239,8 +239,9 @@ describe("the teaching structure", () => {
     }
   });
 
-  it.skip("gives every lecture a public outline", () => {
-    for (const n of nodes("lectures")) {
+  it("gives every lecture but a frozen one a public outline", () => {
+    const frozen = new Set(FROZEN.map((f) => f.path));
+    for (const n of nodes("lectures").filter((l) => !frozen.has(`src/content/${l.id}.md`))) {
       expect(pageHtml(n.id), `${n.id} has no #outline section`).toContain('id="outline"');
     }
   });
@@ -249,11 +250,11 @@ describe("the teaching structure", () => {
     expect(nodes("lectures").some((l) => meta(l).moved === true)).toBe(true);
   });
 
-  it.skip("puts a lecture at the same time as a lab", () => {
+  it("puts a lecture at the same time as a lab", () => {
     expect(nodes("lectures").some((l) => labs().some((lab) => overlaps(l, lab)))).toBe(true);
   });
 
-  it.skip("runs labs at three times a week, in the lab weeks only", () => {
+  it("runs labs at three times a week, in the lab weeks only", () => {
     expect([...new Set(labs().map((n) => Number(meta(n).week)))].sort((a, b) => a - b)).toEqual(LAB_WEEKS);
     for (const week of LAB_WEEKS) {
       const inWeek = labs().filter((n) => meta(n).week === week);
@@ -261,7 +262,7 @@ describe("the teaching structure", () => {
     }
   });
 
-  it.skip("puts every lab-week lecture at the same time as one of that week's labs", () => {
+  it("puts every lab-week lecture at the same time as one of that week's labs", () => {
     for (const l of nodes("lectures").filter((n) => LAB_WEEKS.includes(Number(meta(n).week)))) {
       const same = labs().filter((lab) => overlaps(l, lab));
       expect(same, `${l.id} shares no time with a lab`).toHaveLength(1);

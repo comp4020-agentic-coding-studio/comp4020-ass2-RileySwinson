@@ -26,11 +26,7 @@ for (const s of sessions) {
   const d = s.data as typeof s.data & Timed;
   if (d.kind === "break") continue;
   if (d.kind === "lab") {
-    // The Lab A stream repeats weekly from its first lab to week 12.
-    for (let week = d.week; week <= 12; week++) {
-      const date = new Date(d.date.getTime() + (week - d.week) * 7 * 86_400_000);
-      rows.push({ week, date, activity: d.title, href: `/sessions/${s.id}/`, time: formatSlot(d.start, d.end), note: "Not recorded" });
-    }
+    rows.push({ week: d.week, date: d.date, activity: d.title, href: `/sessions/${s.id}/`, time: formatSlot(d.start, d.end), note: "Not recorded" });
     continue;
   }
   rows.push({ week: d.week, date: d.date, activity: `${sessionLabels.singular}: ${d.title}`, href: `/sessions/${s.id}/`, time: formatSlot(d.start, d.end), note: "Not recorded" });

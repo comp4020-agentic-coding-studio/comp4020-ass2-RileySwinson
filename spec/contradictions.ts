@@ -266,4 +266,87 @@ export const contradictions: readonly Contradiction[] = [
       { page: "assessments/whole-cohort-project", text: "Every member of the group is awarded that mark." },
     ],
   },
+  {
+    id: "drop-in-questions-after-drop-ins-end",
+    week: 7,
+    component: "Lecture questions go to a drop-in session that stopped running in week 6",
+    claims: [
+      { page: "lectures/week-07", text: "Questions are answered during the drop-in session." },
+      { page: "sessions/06-the-census-date", text: "This is the final workshop." },
+    ],
+  },
+  {
+    id: "lecture-lab-clash",
+    week: 7,
+    component: "Compulsory lecture at the same time as a compulsory lab, which is not a clash",
+    claims: [
+      { page: "lectures/week-07", text: "Attendance at every lecture is required for the in-lecture assessment." },
+      { page: "sessions/lab-07-2", text: "Attendance at every lab is required." },
+      { page: "assessments/labs", text: "Lectures are clashable activities. A lecture held at the same time as a lab is not a timetable clash." },
+    ],
+  },
+  {
+    id: "attendance-capped",
+    week: 10,
+    component: "Attendance is compulsory and capped at the room's capacity",
+    claims: [
+      { page: "lectures/week-10", text: "Lecture attendance is capped at the capacity of the room." },
+      { page: "policies", text: "Attendance is required at every timetabled activity." },
+    ],
+  },
+  {
+    id: "no-content-assignment-due",
+    week: 3,
+    component: "The week with no content is the week A1 falls due",
+    claims: [
+      { page: "sessions/03-no-content", text: "No content this week." },
+      { page: "assessments/continuous-integrity-assignment", text: "Due: 12:00 pm, Monday 8 March 2027" },
+    ],
+  },
+  {
+    id: "no-teaching-in-week-3",
+    week: 3,
+    component: "Week 3 is dated but has no teaching",
+    against: "Brief: one niche course running across twelve dated teaching weeks",
+    claims: [{ page: "sessions/03-no-content", text: "No content this week." }],
+  },
+  {
+    id: "ai-feedback-ai-banned",
+    week: 8,
+    component: "Staff use generative AI to give feedback on assessment in which students may not use it",
+    claims: [
+      {
+        page: "class-summary",
+        text: "Students receive feedback prepared with the assistance of generative artificial intelligence",
+      },
+      { page: "lectures/week-08", text: "Use of generative artificial intelligence in assessment is a breach of academic integrity." },
+    ],
+  },
+  {
+    id: "appeal-a-final-determination",
+    week: 11,
+    component: "Appealing extension refusals is a learning outcome; extension determinations are final",
+    claims: [
+      { page: "class-summary", text: "appeal the refusal of an extension request that met those requirements" },
+      { page: "policies", text: "Determinations are final." },
+    ],
+  },
+  {
+    id: "certificate-before-illness",
+    week: 11,
+    component: "An in-person medical certificate, dated before the illness began",
+    claims: [
+      { page: "class-summary", text: "evidence that the consultation for that certificate was attended in person" },
+      { page: "policies", text: "documentation dated before the circumstances began" },
+    ],
+  },
+  {
+    id: "weights-adjusted-after-publication",
+    week: 12,
+    component: "Published weights are adjusted to fit a curve, and the adjustments are not released",
+    claims: [
+      { page: "class-summary", text: "Adjusted weightings are not released." },
+      { page: "assessments/continuous-integrity-assignment", text: "Weight: 5%" },
+    ],
+  },
 ];

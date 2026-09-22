@@ -36,3 +36,10 @@ Read the following in full:
 
 - SLOPU_019608, Procedure: Late withdrawal
 - SLOPU_002610, Procedure: Student tuition fee refunds
+
+## Alternative reading
+
+Workshop content is not published. Students who are unable to attend this
+workshop may read the following in full as an alternative:
+
+- Jane Austen, _Pride and Prejudice_, [available online](https://www.gutenberg.org/ebooks/1342)

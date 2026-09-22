@@ -42,3 +42,10 @@ Read the following in full:
 - SLOPU_008804, Procedure: Education materials access
 
 Bring the prescribed edition of each prescribed text.
+
+## Alternative reading
+
+Workshop content is not published. Students who are unable to attend this
+workshop may read the following in full as an alternative:
+
+- Isabella Beeton, _The Book of Household Management_, [available online](https://www.gutenberg.org/ebooks/10136)

@@ -40,3 +40,10 @@ Read the following in full:
 - SLOPU_018809, Procedure: Class Summary
 
 Bring a printed copy of the class summary and a pen.
+
+## Alternative reading
+
+Workshop content is not published. Students who are unable to attend this
+workshop may read the following in full as an alternative:
+
+- Izaak Walton, _The Compleat Angler_, [available online](https://www.gutenberg.org/ebooks/683)

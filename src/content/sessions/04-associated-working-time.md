@@ -41,3 +41,10 @@ Read the following in full:
 
 - SLOPU_000611, Procedure: Casual sessional academic conditions
 - SLOPU_005009, Procedure: Timetabling
+
+## Alternative reading
+
+Workshop content is not published. Students who are unable to attend this
+workshop may read the following in full as an alternative:
+
+- Herman Melville, _Moby-Dick; or, The Whale_, [available online](https://www.gutenberg.org/ebooks/2701)

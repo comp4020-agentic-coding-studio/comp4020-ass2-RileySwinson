@@ -1,17 +1,31 @@
 ---
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
+import { withBase } from "astro-theme-university/url";
 import SessionsGrid from "../../components/SessionsGrid.astro";
 import { sessionLabels, siteConfig } from "../../site-config";
 ---
 
 <ContentLayout
   title={sessionLabels.plural}
-  description="Workshops in weeks 1 to 6."
+  description="Workshops in weeks 1 to 6, and lab streams in the second half of the course."
   {...siteConfig}
 >
   <p>
-    Workshops run in weeks 1 to 6. Each workshop is followed by a drop-in
-    session. Workshops are not recorded.
+    The convenors have a pedagogical disagreement with recorded content and
+    believe any student who cannot attend should not be enrolled at the
+    university; consequently, we have coded our <del>lectures</del> workshops in
+    a way so they are not required to be recorded. Sue us.
+  </p>
+  <p>
+    Workshops run in weeks 1 to 6. Each workshop is one hour, taught by a tutor,
+    and is followed by a two-hour drop-in session. Workshop content is delivered
+    in the workshop only. Each workshop page lists an alternative reading.
   </p>
   <SessionsGrid />
+  <h2 id="labs">Labs</h2>
+  <p>
+    Each lab week has three lab streams. Labs are assessed as
+    <a href={withBase("/assessments/labs/")}>Labs</a>.
+  </p>
+  <SessionsGrid show="labs" />
 </ContentLayout>

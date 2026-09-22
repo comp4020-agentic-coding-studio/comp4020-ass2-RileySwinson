@@ -17,11 +17,11 @@ The satire is the course design, not in the website's design.
 
 ## Course structure
 
-20% in-lecture assessment
-5% assignment 1
-15% assignment 2
-10% lab assessments
-70% final exam
+15% in-lecture assessment
+5% assignment 1 (the Continuous Integrity Assignment)
+10% assignment 2 (the Whole-Cohort Project)
+10% labs
+60% final exam
 
 **Weeks 1–6 are workshops**. They are in a workshop tab at the top of the page. There is a section at the top of the workshop page that explains the workshop structure. This means the same explanations need not be on every individual workshop page.
 These workshops are never recoreded. This lack-of-recording is reminded to students at the top of each workshop page. This is expressed at the top of the workshop page, stating that "The convenors have a pedagocial dissagreement with recorded content and believe any student who cannot attend should not be enrolled at the university; consequently, we have coded our (crossed out) ~~lectures~~ workshops in a way so they are not required to be recorded. Sue us." 
