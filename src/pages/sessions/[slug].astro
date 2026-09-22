@@ -1,11 +1,10 @@
 ---
 import { render } from "astro:content";
 import { getPublishedCollection } from "astro-course-university/content";
-import RelatedContent from "astro-course-university/components/RelatedContent.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import CourseStaff from "../../components/CourseStaff.astro";
 import { formatCourseDay, formatSlot } from "../../lib/dates";
-import { graphCollections, sessionLabels, siteConfig } from "../../site-config";
+import { sessionLabels, siteConfig } from "../../site-config";
 
 export async function getStaticPaths() {
   const sessions = await getPublishedCollection("sessions");
@@ -39,7 +38,6 @@ const title = isLab ? data.title : isBreak ? `Week ${data.week}: ${data.title}` 
     <dd>{data.recorded === false ? (isLab ? "This lab is not recorded." : "This workshop is not recorded.") : "Recorded."}</dd></>)}
   </dl>
   <Content />
-  <RelatedContent entry={session} collections={graphCollections} />
 </ContentLayout>
 
 <style>

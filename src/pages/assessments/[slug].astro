@@ -1,12 +1,11 @@
 ---
 import { render } from "astro:content";
 import { getPublishedCollection } from "astro-course-university/content";
-import RelatedContent from "astro-course-university/components/RelatedContent.astro";
 import Callout from "astro-theme-university/components/Callout.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import MarkingModel from "../../components/MarkingModel.astro";
 import { formatCourseDate, formatDue } from "../../lib/dates";
-import { graphCollections, siteConfig } from "../../site-config";
+import { siteConfig } from "../../site-config";
 
 export async function getStaticPaths() {
   const assessments = await getPublishedCollection("assessments");
@@ -48,5 +47,4 @@ const returned: string | undefined =
   {assessment.data.marking && <MarkingModel marking={assessment.data.marking} />}
   <h2 id="marking-criteria">Marking criteria</h2>
   <p>Marking criteria are not released.</p>
-  <RelatedContent entry={assessment} collections={graphCollections} />
 </ContentLayout>

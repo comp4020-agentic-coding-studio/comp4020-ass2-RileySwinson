@@ -1,12 +1,11 @@
 ---
 import { render } from "astro:content";
 import { getPublishedCollection } from "astro-course-university/content";
-import RelatedContent from "astro-course-university/components/RelatedContent.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import { withBase } from "astro-theme-university/url";
 import CourseStaff from "../../components/CourseStaff.astro";
 import { formatCourseDay, formatSlot } from "../../lib/dates";
-import { graphCollections, siteConfig } from "../../site-config";
+import { siteConfig } from "../../site-config";
 
 export async function getStaticPaths() {
   const lectures = await getPublishedCollection("lectures");
@@ -41,7 +40,6 @@ const title = `Week ${data.week}: ${data.title}`;
   </dl>
   {data.slides && <p><a href={withBase(data.slides)}>Open the slides</a></p>}
   <Content />
-  <RelatedContent entry={lecture} collections={graphCollections} />
 </ContentLayout>
 
 <style>
