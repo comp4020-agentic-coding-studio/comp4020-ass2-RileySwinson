@@ -5,8 +5,9 @@ description:
   week 12.
 week: 12
 due: 2027-05-27T12:00:00+10:00
-weight: 20
+weight: 15
 returned: "2027-06-11"
+outcomes: [3]
 related:
   - lectures/week-07
 ---

@@ -5,11 +5,11 @@ description:
   accompanying report and a period of availability for questioning.
 week: 3
 due: 2027-03-08T12:00:00+11:00
-weight: 20
+weight: 5
 returned: "2027-05-24"
+outcomes: [1, 2, 5]
 related:
   - sessions/05-continuous-integrity
-  - sessions/03-the-public-holiday
 ---
 
 ## The task

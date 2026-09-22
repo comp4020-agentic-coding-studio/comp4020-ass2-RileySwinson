@@ -1,0 +1,16 @@
+---
+import { getEntry } from "astro:content";
+import { formatCourseDate } from "../lib/dates";
+
+// An assessment's return date, read from its frontmatter so prose never
+// restates it.
+interface Props {
+  assessment: string;
+}
+
+const entry = await getEntry("assessments", Astro.props.assessment);
+const returned = (entry?.data as { returned?: string } | undefined)?.returned;
+if (!returned) throw new Error(`assessments/${Astro.props.assessment} has no returned: date`);
+---
+
+{formatCourseDate(returned)}

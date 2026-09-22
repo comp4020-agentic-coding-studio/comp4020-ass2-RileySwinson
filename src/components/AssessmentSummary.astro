@@ -1,0 +1,52 @@
+---
+import { getPublishedCollection } from "astro-course-university/content";
+import { withBase } from "astro-theme-university/url";
+import { formatCourseDate } from "../lib/dates";
+
+// The class summary's assessment table. Every cell is read from assessment
+// frontmatter, so the table restates nothing (CLAUDE.md, "Facts").
+type Extra = { returned?: string; outcomes?: number[] };
+
+const assessments = (await getPublishedCollection("assessments")).sort(
+  (a, b) => a.data.due.getTime() - b.data.due.getTime(),
+);
+---
+
+<div class="table-scroll" role="region" aria-label="Assessment summary" tabindex="0">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Assessment task</th>
+        <th scope="col">Value</th>
+        <th scope="col">Due date</th>
+        <th scope="col">Return date</th>
+        <th scope="col">Learning outcomes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        assessments.map((a) => {
+          const d = a.data as typeof a.data & Extra;
+          return (
+            <tr>
+              <td><a href={withBase(`/assessments/${a.id}/`)}>{d.title}</a></td>
+              <td>{d.weight}%</td>
+              <td>{formatCourseDate(d.due)}</td>
+              <td>{d.returned ? formatCourseDate(d.returned) : "Not listed."}</td>
+              <td>{d.outcomes?.join(", ") ?? "Not listed."}</td>
+            </tr>
+          );
+        })
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .table-scroll {
+    overflow-x: auto;
+  }
+  table {
+    min-width: 36rem;
+  }
+</style>
