@@ -13,8 +13,8 @@ Dr Voss was awarded a doctorate in 2026 and was appointed co-convener of
 Comply in the same year.
 
 The co-convener shares responsibility for Comply with the course convener.
-Where the co-convener and the course convener differ, the course convener's
-determination applies.
+Either may determine a matter that the course's policies refer to the
+convenors.
 
 ## Consultation
 

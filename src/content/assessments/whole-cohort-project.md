@@ -39,3 +39,7 @@ The group receives one mark. Every member of the group is awarded that mark.
 
 Contributions are not assessed individually. The commit history is not used to
 determine a student's mark.
+
+The mark is the shared responsibility of every member of the group and is not
+subject to review. This provision overrides learning outcome 10 in the
+[class summary](/class-summary/#learning-outcomes).

@@ -358,4 +358,23 @@ export const contradictions: readonly Contradiction[] = [
       { page: "assessments/continuous-integrity-assignment", text: "Submission more than 24 hours before the due time" },
     ],
   },
+  {
+    id: "adjustments-vs-no-alternative",
+    week: 7,
+    component: "Adjustments are negotiable; the in-lecture assessment has no alternative arrangement",
+    claims: [
+      { page: "policies", text: "including adjustments for accessibility, are negotiated individually" },
+      { page: "lectures", text: "No alternative arrangement is available to a student who does not complete it." },
+    ],
+  },
+  {
+    id: "a2-overrides-appeal-outcome",
+    week: 11,
+    component: "A2 overrides a learning outcome in the authoritative class summary",
+    claims: [
+      { page: "assessments/whole-cohort-project", text: "This provision overrides learning outcome 10 in the" },
+      { page: "class-summary", text: "appeal a final result" },
+      { page: "class-summary", text: "The class summary is the authoritative statement of the course's requirements." },
+    ],
+  },
 ];
