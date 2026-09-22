@@ -15,7 +15,6 @@ teachers:
   - cornelius-grimm
 related:
   - assessments/in-lecture-assessment
-  - people/student-administration
 ---
 
 This lecture sets out how to request an extension, how to request a review of a

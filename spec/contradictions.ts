@@ -108,15 +108,6 @@ export const contradictions: readonly Contradiction[] = [
     ],
   },
   {
-    id: "announcements-channel",
-    week: 7,
-    component: "Five platforms; announcements on two of them",
-    claims: [
-      { page: "lectures/week-07", text: "All course announcements are made on Teams." },
-      { page: "policies", text: "Course announcements are made on Wattle only." },
-    ],
-  },
-  {
     id: "ai-permitted-and-prohibited",
     week: 8,
     component: "AI allowed in coursework; all coursework is assessment; AI banned in assessment",
@@ -183,15 +174,6 @@ export const contradictions: readonly Contradiction[] = [
     claims: [
       { page: "policies", text: "Review requests must identify the marking criterion that was misapplied." },
       { page: "assessments/continuous-integrity-assignment", text: "Marking criteria are not released." },
-    ],
-  },
-  {
-    id: "feedback-after-last-workshop",
-    week: 11,
-    component: "Feedback in a workshop that no longer runs",
-    claims: [
-      { page: "policies", text: "Feedback on assessment is provided in the workshop following its return." },
-      { page: "sessions/06-the-census-date", text: "This is the final workshop." },
     ],
   },
   {
@@ -365,6 +347,15 @@ export const contradictions: readonly Contradiction[] = [
     claims: [
       { page: "decks/week-09", text: "This 45-minute lecture covers essential compliance competencies." },
       { page: "timetable", text: "2:00 pm to 5:00 pm Lecture: The Generated Lecture" },
+    ],
+  },
+  {
+    id: "early-submission-windows",
+    week: 3,
+    component: "Early submission: 0 after one hour before the due time, 100% deduction after 24 hours before, and both apply",
+    claims: [
+      { page: "policies", text: "Assessment submitted more than one hour before the due time receives a mark of 0." },
+      { page: "assessments/continuous-integrity-assignment", text: "Submission more than 24 hours before the due time" },
     ],
   },
 ];
