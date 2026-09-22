@@ -81,8 +81,10 @@ prints is a 404.
 - `src/assets/images/` --- starter home/social artwork. Replace it with
   course-specific work, or make a deliberate image-free treatment;
   `pnpm check:evidence` will not pass the placeholders.
-- `spec/` --- the shipped course-data baseline (`data-integrity.test.ts`); the
-  spec tests you write live alongside it.
+- `spec/` --- the shipped course-data baseline (`data-integrity.test.ts`), plus
+  Comply's own spec: the week-by-week plan (`weeks.md`), the contradiction
+  registry (`contradictions.ts`) and the tests that enforce both
+  (`comply.test.ts`).
 - `.githooks/pre-commit` --- blocks any commit that contains something shaped
   like an API key, so your COMP4020 key can't end up in a public repo. Installed
   automatically by `pnpm install`.

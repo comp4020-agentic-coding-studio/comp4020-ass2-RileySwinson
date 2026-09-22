@@ -26,6 +26,17 @@ count: select the checks that protect your work's real promises, and test the
 **contracts** — what the page must do, not how you built it — so the tests
 survive a change of approach, or of stack.
 
+## Comply's spec
+
+- `weeks.md` --- the author's week-by-week plan: one broken part of a
+  university per week, where each is enacted on the site, and the assessment
+  split. The agent doesn't change it unless asked.
+- `contradictions.ts` --- the registry. A contradiction is intended if and only
+  if it is listed here, with its exact phrases and the pages they appear on.
+- `comply.test.ts` --- fails if a registered phrase leaves its page, if a
+  designed rule gets "fixed", or if the course structure in `CLAUDE.md` and
+  `weeks.md` stops holding.
+
 A green suite here is backpressure, not a mark: your tutor verifies what you
 deployed against the published spec at the crit, and keeping your own tests
 green is how you arrive with no surprises.
